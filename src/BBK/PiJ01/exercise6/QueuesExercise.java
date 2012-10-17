@@ -25,12 +25,14 @@ public class QueuesExercise implements Exercise {
         q.insert("First in");
         q.insert("Second in");
         q.insert("Third in");
+        
         System.out.format("Added first, second and third.\n");
+        System.out.format("There's %d elements in the queue...\n", q.size());
         
         System.out.format("Retrieved: %s\n", q.retrieve());
         System.out.format("Retrieved: %s\n", q.retrieve());
         System.out.format("There's %d elements in the queue...\n", q.size());
-        q.insert("Fourth");
+        q.insert("Fourth in");
         
         System.out.format("Retrieved: %s\n", q.retrieve());
         System.out.format("Retrieved: %s\n", q.retrieve());
@@ -38,27 +40,6 @@ public class QueuesExercise implements Exercise {
     }
 }
 
-
-class Element <T> {
-    private Element<T> next;
-    private T obj;
-    
-    public Element(T obj) {
-        this.obj = obj;
-    }
-    
-    public void setNext(Element<T> next) {
-        this.next = next;
-    }
-    
-    public Element<T> getNext() {
-        return next;
-    }
-    
-    public T getObject() {
-        return obj;
-    }
-}
 
 class Queue <T> {
     private Element<T> next_element;
@@ -83,7 +64,7 @@ class Queue <T> {
     public T retrieve() {
         T next_obj;
         try {
-            next_obj = next_element.getNext().getObject();
+            next_obj = next_element.getObject();
         } catch(NullPointerException e) {
             return null;
         }

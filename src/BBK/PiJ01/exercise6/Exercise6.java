@@ -26,7 +26,8 @@ public class Exercise6 {
         exercises.add(new DoublyLinkedList());
         exercises.add(new CircularList());
         exercises.add(new QueuesExercise());
-            
+        exercises.add(new StacksExercise());
+        
         ExerciseChooser ech = new ExerciseChooser(exercises);
         ech.run();
     }
