@@ -25,6 +25,7 @@ public class Exercise6 {
         exercises.add(new DoWhilePractise());
         exercises.add(new DoublyLinkedList());
         exercises.add(new CircularList());
+        exercises.add(new QueuesExercise());
             
         ExerciseChooser ech = new ExerciseChooser(exercises);
         ech.run();
