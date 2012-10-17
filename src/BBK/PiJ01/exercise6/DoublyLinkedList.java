@@ -60,18 +60,33 @@ public class DoublyLinkedList implements Exercise {
 }
 
 
-class Patient {
-    private Patient next_patient;
-    private Patient prev_patient;
-    
-    public String name; 
-    public int age;
-    public String illness;
+abstract class BasePatient {
+    private String name; 
+    private int age;
+    private String illness;
 
-    public Patient(String name, int age, String illness) {
+    public BasePatient(String name, int age, String illness) {
         this.name = name;
         this.age = age;
         this.illness = illness;
+    }
+    
+    public String toString() {
+        return String.format("Name: %s, \tAge: %d, \tIllness code: %s", 
+                                        name, age, illness);
+    }
+}
+
+class Patient extends BasePatient {
+    private Patient next_patient;
+    private Patient prev_patient;
+    
+    private String name; 
+    private int age;
+    private String illness;
+
+    public Patient(String name, int age, String illness) {
+        super(name, age, illness);
     }
     
     public void setPrev(Patient prev_patient) {
@@ -92,11 +107,6 @@ class Patient {
     
     public Patient getNext() {
         return next_patient;
-    }
-    
-    public String toString() {
-        return String.format("Name: %s, \tAge: %d, \tIllness code: %s", 
-                                        name, age, illness);
     }
 }
 
@@ -146,6 +156,7 @@ class WaitingList {
         for (Patient p=first_patient; p!=null; p=p.getNext()) {
             System.out.println( "\t" + p.toString() );
         }
+        System.out.println("");
     }
     
     public void printBackwards() {
