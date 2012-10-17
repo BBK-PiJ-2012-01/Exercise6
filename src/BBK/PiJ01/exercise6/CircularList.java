@@ -22,15 +22,42 @@ public class CircularList implements Exercise {
                 + "Doctors in hospitals have to do their 'rounds', where\n"
                 + "they check in on their patients over and over again...";
     }
+    
+    public void run() {
+        Rounds lst = new Rounds();
+        
+        OneWayPatient[] patients = new OneWayPatient[10];
+        String[] names = new String[]{"Andy", "Ben", "Charlie", "Dan", "Emily", 
+                                    "Fran", "Gerald", "Harry", "Isaac", "John"};
+    
+        for (int i=0; i<10; i++) {
+            patients[i] = new OneWayPatient(names[i], 20+i, "abcdefghij".substring(i,i+1));
+            lst.add(patients[i]);
+        }
+        
+        lst.printForwards();
+        
+        lst.delete(patients[2]);
+        lst.delete(patients[8]);
+        System.out.println("\nCharlie and Isaac opted out of the waiting list.");
+        
+        lst.printForwards();
+        
+        OneWayPatient extra = new OneWayPatient("Kelly", 30, "k");
+        lst.add(extra);
+        
+        System.out.println("\nAdded Kelly to the list.");
+        lst.printForwards();
+        
+        System.out.println("\nTrying to delete Xander from the list...");
+        OneWayPatient non_existant = new OneWayPatient("Xander", 80, "x");
+        lst.delete(non_existant);
+    }
 }
 
 class OneWayPatient extends BasePatient {
     private OneWayPatient next_patient;
     
-    private String name; 
-    private int age;
-    private String illness;
-
     public OneWayPatient(String name, int age, String illness) {
         super(name, age, illness);
     }
@@ -44,7 +71,7 @@ class OneWayPatient extends BasePatient {
     }
     
     public String toString() {
-        return String.format("Name: %s, \tAge: %d, \tIllness code: %s", 
+        return String.format("Name: %s, \tAge: %d, \tIllness code: %s\n", 
                                         name, age, illness);
     }
 }
@@ -64,16 +91,53 @@ class Rounds {
     }
     
     public void delete(OneWayPatient old_patient) {
-        old_patient
+        OneWayPatient prev = getPrev(old_patient);
+        if (prev == null) {
+            System.out.println("Patient not in list.");
+            return;
+        } else if (prev == old_patient) {
+            setAsOnlyPatient(null);
+        } else {
+            prev.setNext(old_patient.getNext());
+        }
+        cleanDeletedPatient(old_patient);
     }
     
-    private OneWayPatient getPrevious() {
-        OneWayPatient p = last_patient.getNext();
+    private OneWayPatient getPrev(OneWayPatient next) {
+        if (last_patient == null)
+            return null;
+        OneWayPatient p = last_patient;
         
         do {
-            
             p = p.getNext();
+            if (p.getNext() == next)
+                return p;
         } while(p != last_patient);
+        return null;
     }
     
+    private void setAsOnlyPatient(OneWayPatient only_patient) {
+        last_patient = only_patient;
+        if (last_patient != null)
+            last_patient.setNext(last_patient);
+    }
+    
+    private void cleanDeletedPatient(OneWayPatient deleted_patient) {
+        deleted_patient.setNext(null);
+    }
+    
+    public void printForwards() {
+        if (last_patient == null) {
+            System.out.println("The list is empty!");
+            return;
+        }
+        
+        System.out.println("Printing the list going forwards...");
+        OneWayPatient p = last_patient;
+        
+        do {
+            p = p.getNext();
+            System.out.append( "\t" + p.toString());
+        } while(p != last_patient);
+    }
 }

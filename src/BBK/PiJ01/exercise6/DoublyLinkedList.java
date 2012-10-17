@@ -61,9 +61,9 @@ public class DoublyLinkedList implements Exercise {
 
 
 abstract class BasePatient {
-    private String name; 
-    private int age;
-    private String illness;
+    protected String name; 
+    protected int age;
+    protected String illness;
 
     public BasePatient(String name, int age, String illness) {
         this.name = name;
@@ -72,7 +72,7 @@ abstract class BasePatient {
     }
     
     public String toString() {
-        return String.format("Name: %s, \tAge: %d, \tIllness code: %s", 
+        return String.format("Name: %s, \tAge: %d, \tIllness code: %s\n", 
                                         name, age, illness);
     }
 }
@@ -81,10 +81,6 @@ class Patient extends BasePatient {
     private Patient next_patient;
     private Patient prev_patient;
     
-    private String name; 
-    private int age;
-    private String illness;
-
     public Patient(String name, int age, String illness) {
         super(name, age, illness);
     }
@@ -135,10 +131,14 @@ class WaitingList {
             old_patient.getNext().setPrev( old_patient.getPrev() );
             --number_of_patients;
             
-        } else if(number_of_patients != 0)
+        } else if(number_of_patients != 0) {
             System.out.println("Patient is not in list.");
-        else
+            return;
+        } else {
             setAsOnlyPatient(null);
+        }
+        
+        cleanDeletedPatient(old_patient);
     }
     
     private void setAsOnlyPatient(Patient only_patient) {
@@ -168,4 +168,8 @@ class WaitingList {
         System.out.println("");
     }
     
+    private void cleanDeletedPatient(Patient deleted_patient) {
+        deleted_patient.setNext(null);
+        deleted_patient.setPrev(null);
+    }
 }
