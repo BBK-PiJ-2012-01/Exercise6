@@ -31,21 +31,31 @@ public class DoublyLinkedList implements Exercise {
                                     "Fran", "Gerald", "Harry", "Isaac", "John"};
     
         for (int i=0; i<10; i++) {
-            patients[i] = new Patient(names[i], 20+i, "abcdefghij".substring(i));
+            patients[i] = new Patient(names[i], 20+i, "abcdefghij".substring(i,i+1));
             lst.add(patients[i]);
         }
         
-        lst.print();
+        lst.printForwards();
+        lst.printBackwards();
         
         
         lst.delete(patients[2]);
         lst.delete(patients[8]);
         System.out.println("\nCharlie and Isaac opted out of the waiting list.");
         
+        lst.printForwards();
+        lst.printBackwards();
         
+        Patient extra = new Patient("Kelly", 30, "k");
+        lst.add(extra);
         
-        lst.print();
+        System.out.println("\nAdded Kelly to the list.");
+        lst.printForwards();
+        lst.printBackwards();
         
+        System.out.println("\nTrying to delete Xander from the list...");
+        Patient non_existant = new Patient("Xander", 80, "x");
+        lst.delete(non_existant);
     }
 }
 
@@ -85,7 +95,7 @@ class Patient {
     }
     
     public String toString() {
-        return String.format("Name: %s, Age: %d, Illness code: %s", 
+        return String.format("Name: %s, \tAge: %d, \tIllness code: %s", 
                                         name, age, illness);
     }
 }
@@ -100,17 +110,22 @@ class WaitingList {
         if (last_patient != null) {
             last_patient.setNext(new_patient);
             last_patient = new_patient;
+            ++number_of_patients;
         } else {
             setAsOnlyPatient(new_patient);
         }
     }
     
     public void delete(Patient old_patient) {
-        if (old_patient.getPrev() != null)
+        if (old_patient.getPrev() != null) {
             old_patient.getPrev().setNext( old_patient.getNext() );
-        else if (old_patient.getNext() != null)
+            --number_of_patients;
+            
+        } else if (old_patient.getNext() != null) {
             old_patient.getNext().setPrev( old_patient.getPrev() );
-        else if(number_of_patients != 0)
+            --number_of_patients;
+            
+        } else if(number_of_patients != 0)
             System.out.println("Patient is not in list.");
         else
             setAsOnlyPatient(null);
@@ -119,14 +134,27 @@ class WaitingList {
     private void setAsOnlyPatient(Patient only_patient) {
         last_patient = only_patient;
         first_patient = only_patient;
+        if (only_patient == null)
+            number_of_patients = 0;
+        else
+            number_of_patients = 1;
     }
     
     public void printForwards() {
-        System.out.format("List has %d patients:\n", number_of_patients);
+        System.out.format("List has %d patients.  Here they are:\n", number_of_patients);
         
-        for (Patient p=first_patient; p.getNext()!=null; p=p.getNext()) {
+        for (Patient p=first_patient; p!=null; p=p.getNext()) {
             System.out.println( "\t" + p.toString() );
         }
+    }
+    
+    public void printBackwards() {
+        System.out.format("List has %d patients.  Here they are in reverse order:\n", number_of_patients);
+        
+        for (Patient p=last_patient; p!=null; p=p.getPrev()) {
+            System.out.println( "\t" + p.toString() );
+        }
+        System.out.println("");
     }
     
 }

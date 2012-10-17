@@ -23,6 +23,7 @@ public class Exercise6 {
         
         exercises.add(new SpyExercise());
         exercises.add(new DoWhilePractise());
+        exercises.add(new DoublyLinkedList());
             
         ExerciseChooser ech = new ExerciseChooser(exercises);
         ech.run();
