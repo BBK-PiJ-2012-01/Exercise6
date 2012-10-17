@@ -15,6 +15,8 @@ import BBK.PiJ01.common.IOGeneric;
  */
 public class DoWhilePractise implements Exercise {
     private int[] statistics;
+    private int total_students;
+    
     private void dataEntry() {
         int mark;
         
@@ -32,6 +34,7 @@ public class DoWhilePractise implements Exercise {
             
             for (Grade g : Grade.values()) {
                 if (g.isValidFor(mark)) {
+                    ++total_students;
                     ++statistics[g.getID()];
                     break;
                 }
@@ -42,11 +45,22 @@ public class DoWhilePractise implements Exercise {
     
     private void init() {
         statistics = new int[]{0,0,0,0};
+        total_students = 0;
     }
     
     private void printResults() {
-        System.out.format("Results are: %s",
-                IOGeneric.intListToString(statistics, "[,]"));
+        String s = "Results are: %s\n";
+        System.out.format(s,
+               IOGeneric.intListToString(statistics, "[,]"));
+        
+        StringBuffer sbuf = new StringBuffer();
+        sbuf.append(String.format("There are %d students: ", total_students));
+        
+        for (Grade g : Grade.values()) {
+            sbuf.append( g.getMsg( statistics[g.getID()] ) );
+        }
+        
+        IOGeneric.printResult(sbuf.toString(), "-");
     }
     
     // Exercise implementation:
@@ -67,26 +81,29 @@ public class DoWhilePractise implements Exercise {
 }
 
 enum Grade {
-    Distinction (70, 100, "distinction", 0),
-    Pass (50, 69, "pass", 1),
-    Fail (0, 49, "fail", 2),
-    Invalid ("invalid", 3);
+    Distinction (70, 100, "%d distinction%s, ", "s", 0),
+    Pass (50, 69, "%d pass%s, ", "es", 1),
+    Fail (0, 49, "%d fail%s, ", "s", 2),
+    Invalid ("(plus %d invalid%s).", "", 3);
     
     private int lower_bound, higher_bound;
     private String msg;
     private int ID;
     private boolean catch_all = false;
+    private String plural_str;
     
-    Grade(int lower_bound, int higher_bound, String msg, int ID) {
+    Grade(int lower_bound, int higher_bound, String msg, String plural_str, int ID) {
         this.lower_bound = lower_bound;
         this.higher_bound = higher_bound;
         this.msg = msg;
         this.ID = ID;
+        this.plural_str = plural_str;
     }
     
-    Grade(String msg, int ID) {
+    Grade(String msg, String plural_str, int ID) {
         this.msg = msg;
         this.ID = ID;
+        this.plural_str = plural_str;
         catch_all = true;
     }
     
@@ -94,11 +111,11 @@ enum Grade {
         return (mark >= lower_bound && mark <= higher_bound) || catch_all;
     }
     
-    String getMsg(boolean plural) {
-        if (plural && msg.endsWith("e")) {
-            return msg + "s";
-        }
-        return msg;
+    String getMsg(int number) {
+        if (number != 1) 
+            return String.format(msg, number, plural_str);
+        
+        return String.format(msg, number, "");
     }
     
     public int getID() {
