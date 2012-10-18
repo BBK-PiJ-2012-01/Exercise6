@@ -9,7 +9,7 @@ package BBK.PiJ01.exercise6;
  *
  * @author Sam Wright <swrigh11@dcs.bbk.ac.uk>
  */
-public class Element <T> {
+abstract public class Element <T> {
     private Element<T> next;
     private T obj;
     
@@ -28,4 +28,7 @@ public class Element <T> {
     public T getObject() {
         return obj;
     }
+    
+    abstract public String toString();
 }
+

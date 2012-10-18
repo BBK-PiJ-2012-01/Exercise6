@@ -26,16 +26,16 @@ public class StacksExercise implements Exercise {
         s.push("Second in");
         s.push("Third in");
         
-        System.out.format("Added first, second and third.\n");
+        System.out.format("Pushing first, second and third.\n");
         
-        System.out.format("Retrieved: %s\n", s.pop());
-        System.out.format("Retrieved: %s\n", s.pop());
+        System.out.format("Popped: %s\n", s.pop());
+        System.out.format("Popped: %s\n", s.pop());
         
-        System.out.format("Added fourth.\n");
+        System.out.format("Pushed fourth.\n");
         s.push("Fourth in");
         
-        System.out.format("Retrieved: %s\n", s.pop());
-        System.out.format("Retrieved: %s\n", s.pop());
+        System.out.format("Popped: %s\n", s.pop());
+        System.out.format("Popped: %s\n", s.pop());
         System.out.format("Is the stack empty? %b\n", s.empty());
     }
 }
