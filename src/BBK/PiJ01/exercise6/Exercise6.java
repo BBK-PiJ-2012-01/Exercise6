@@ -23,7 +23,7 @@ public class Exercise6 {
         
         exercises.add(new SpyExercise());
         exercises.add(new DoWhilePractise());
-        exercises.add(new DoublyLinkedList());
+        exercises.add(new DoublyLinkedListExercise());
         exercises.add(new CircularList());
         exercises.add(new QueuesExercise());
         exercises.add(new StacksExercise());

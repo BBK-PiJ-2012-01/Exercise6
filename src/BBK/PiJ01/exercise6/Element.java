@@ -9,26 +9,26 @@ package BBK.PiJ01.exercise6;
  *
  * @author Sam Wright <swrigh11@dcs.bbk.ac.uk>
  */
-abstract public class Element <T> {
-    private Element<T> next;
-    private T obj;
+public class Element extends AbstractElement {
+    protected AbstractElement next;
     
-    public Element(T obj) {
-        this.obj = obj;
-    }
-    
-    public void setNext(Element<T> next) {
+    public void setNext(AbstractElement next) {
         this.next = next;
     }
     
-    public Element<T> getNext() {
+    public AbstractElement getNext() {
         return next;
     }
     
-    public T getObject() {
-        return obj;
-    }
-    
-    abstract public String toString();
+    public void setPrev(AbstractElement e) {}
+    public AbstractElement getPrev() {return null;}
 }
 
+
+abstract class AbstractElement {
+    abstract public void setNext(AbstractElement e);
+    abstract public void setPrev(AbstractElement e);
+    
+    abstract public AbstractElement getNext();
+    abstract public AbstractElement getPrev();
+}
