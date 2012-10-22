@@ -29,6 +29,7 @@ public class Exercise6 {
         exercises.add(new QueuesExercise());
         exercises.add(new StacksExercise());
         exercises.add(new ArrayToList());
+        exercises.add(new SortedListExercise());
         
         ExerciseChooser ech = new ExerciseChooser(exercises);
         ech.run();

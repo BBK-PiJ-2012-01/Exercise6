@@ -34,10 +34,10 @@ public class BaseLinkedList <T extends ElementInterface> {
         if (last_element != null) {
             new_element.setNext(first_element);
             first_element = new_element;
+            ++number_of_elements;
         } else {
             setAsOnlyElement(new_element);
         }
-        ++number_of_elements;
     }
     
     protected T popEndElement() {
@@ -93,6 +93,27 @@ public class BaseLinkedList <T extends ElementInterface> {
                 return test_element;
         }
         return null;
+    }
+    
+    public void insertNextToRef(T e, T ref) {
+        T ref_next = getNextElement(ref);
+        ref.setNext(e);
+        e.setNext(ref_next);
+        if (ref_next == null) {
+            last_element = e;
+        }
+        ++number_of_elements;
+    }
+    
+    public void insertPrevToRef(T e, T ref) {
+        T ref_prev = getPrevElement(ref);
+        try {
+            ref_prev.setNext(e);
+        } catch (NullPointerException err) {
+            first_element = e;
+        }
+        e.setNext(ref);
+        ++number_of_elements;
     }
     
     protected void cleanDeletedElement(T e) {
@@ -154,6 +175,14 @@ public class BaseLinkedList <T extends ElementInterface> {
         protected T getNextElement() {
             return getNextElement((T) next_element);
         }
+        
+        protected void insertAfterRef(T e, T ref) {
+            insertNextToRef(e, ref);
+        }
+        
+        protected void insertBeforeRef(T e, T ref) {
+            insertPrevToRef(e, ref);
+        }
     }
     
     protected class BackwardIterator extends Iterator<T> {
@@ -176,6 +205,13 @@ public class BaseLinkedList <T extends ElementInterface> {
         protected T getNextElement() {
             return getPrevElement((T) next_element);
         }
+        
+        protected void insertAfterRef(T e, T ref) {
+            insertPrevToRef(e, ref);
+        }
+        
+        protected void insertBeforeRef(T e, T ref) {
+            insertNextToRef(e, ref);
+        }
     }
 }
-

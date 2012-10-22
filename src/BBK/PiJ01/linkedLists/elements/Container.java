@@ -11,9 +11,9 @@ import BBK.PiJ01.linkedLists.elements.Element;
  *
  * @author Sam Wright <swrigh11@dcs.bbk.ac.uk>
  */
-public class Container <T> extends Element{
-    private Element prev;
-    private T obj;
+public class Container <T> extends Element {
+    protected Element prev;
+    protected T obj;
     
     public Container(T obj) {
         this.obj = obj;

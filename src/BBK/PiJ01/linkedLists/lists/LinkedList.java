@@ -6,8 +6,6 @@
 package BBK.PiJ01.linkedLists.lists;
 
 import BBK.PiJ01.linkedLists.elements.Container;
-import BBK.PiJ01.linkedLists.elements.ElementInterface;
-import BBK.PiJ01.linkedLists.iterators.Iterator;
 
 /**
  *
@@ -28,5 +26,9 @@ public class LinkedList <T> extends BaseLinkedList<Container<T>> {
             boxed_list[i] = (Integer) array[i];
         }
         return fromArray(boxed_list);
+    }
+    
+    public void insert(T value) {
+        addElement(new Container<T>(value));
     }
 }

@@ -41,6 +41,28 @@ public abstract class Iterator <T extends ElementInterface> {
         return this_element;
     }
     
+    public void insertAhead(T e) {
+        insertAfterRef(e, this_element);
+        if (finishing_element == this_element) {
+            finishing_element = getFinishingElement();
+            iterating = true;
+        }
+        
+        next_element = e;
+    }
+    
+    public void insertBehind(T e) {
+        System.out.format("\ninserting %s before %s ... ", e, this_element);
+        try {
+            insertAfterRef(e, prev_element);
+        } catch (NullPointerException err) {
+            System.out.format("that was the first.");
+            insertBeforeRef(e, this_element);
+        }
+        
+        prev_element = e;
+    }
+    
     public void swapWith(Iterator itr) {
         // swapWithOneBehind expects that 
         // 'this_element' should come later than 'itr.this_element'
@@ -144,4 +166,6 @@ public abstract class Iterator <T extends ElementInterface> {
     abstract protected T getFinishingElement();
     abstract protected void setFinishingElement(T e);
     abstract protected T getNextElement();
+    abstract protected void insertAfterRef(T e, T ref);
+    abstract protected void insertBeforeRef(T e, T ref);
 }

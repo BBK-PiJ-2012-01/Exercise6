@@ -8,8 +8,6 @@ package BBK.PiJ01.exercise6;
 import BBK.PiJ01.common.Exercise;
 import BBK.PiJ01.linkedLists.iterators.Iterator;
 import BBK.PiJ01.linkedLists.lists.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
