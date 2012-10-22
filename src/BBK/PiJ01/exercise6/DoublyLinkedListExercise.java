@@ -5,8 +5,13 @@
 
 package BBK.PiJ01.exercise6;
 
+import BBK.PiJ01.linkedLists.*;
 import BBK.PiJ01.common.Exercise;
 import BBK.PiJ01.common.IOGeneric;
+import BBK.PiJ01.linkedLists.elements.DoublyElement;
+import BBK.PiJ01.linkedLists.lists.DoublyLinkedList;
+
+
 
 
 
@@ -28,7 +33,7 @@ public class DoublyLinkedListExercise implements Exercise {
     
     public void run() {
         
-        DoubleLinkedList<Patient> lst = new DoubleLinkedList();
+        DoublyLinkedList<Patient> lst = new DoublyLinkedList();
         
         Patient[] patients = new Patient[10];
         String[] names = new String[]{"Andy", "Ben", "Charlie", "Dan", "Emily", 
@@ -62,44 +67,12 @@ public class DoublyLinkedListExercise implements Exercise {
         lst.delete(non_existant);
     }
 }
-class DoublyElement extends AbstractElement {
-    protected AbstractElement prev;// = Patient.test_element;
-    protected AbstractElement next;// = Patient.test_element;
-    
-    public void setPrev(AbstractElement prev) {
-        this.prev = prev;
-
-        if (prev != null && prev.getNext() != this) {
-            if (prev != null)
-                prev.setNext(this);
-        }
-    }
-    
-    public void setNext(AbstractElement next) {
-        this.next = next;
-
-        if (next != null && next.getPrev() != this) {
-            if (next != null)
-                next.setPrev(this);
-        }
-    }
-    
-    public AbstractElement getPrev() {
-        return prev;
-    }
-    
-    public AbstractElement getNext() {
-        return next;
-    }
-}
 
 
 class Patient extends DoublyElement {
     protected String name; 
     protected int age;
     protected String illness;
-    
-    static public Patient test_element = new Patient("Null", 0, "z");
     
     public Patient(String name, int age, String illness) {
         this.name = name;
@@ -110,27 +83,5 @@ class Patient extends DoublyElement {
     public String toString() {
         return String.format("Name: %s, \tAge: %d, \tIllness code: %s\n", 
                                         name, age, illness);
-    }
-}
-
-
-class DoubleLinkedList <T extends DoublyElement> extends AbstractLinkedList<T> {
-    public void add(T e) {
-        addElement(e);
-    }
-    
-    public void delete(T e) {
-        deleteElement(e);
-    }
-    
-    @Override
-    protected void cleanDeletedElement(T e) {
-        e.setNext(null);
-        e.setPrev(null);
-    }
-    
-    @Override
-    protected T getPrevElement(T e) {
-        return (T) e.getPrev();
     }
 }

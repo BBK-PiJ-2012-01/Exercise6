@@ -6,6 +6,7 @@
 package BBK.PiJ01.exercise6;
 
 import BBK.PiJ01.common.Exercise;
+import BBK.PiJ01.linkedLists.lists.Stack;
 
 /**
  *
@@ -40,6 +41,7 @@ public class StacksExercise implements Exercise {
     }
 }
 
+/*
 class Stack <T> {
     private Element<T> next_element;
     
@@ -62,4 +64,4 @@ class Stack <T> {
         next_element = next_element.getNext();
         return next_obj;
     }
-}
+}*/ 

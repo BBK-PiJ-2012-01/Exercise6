@@ -6,12 +6,14 @@
 package BBK.PiJ01.exercise6;
 
 import BBK.PiJ01.common.Exercise;
+import BBK.PiJ01.linkedLists.lists.CircularList;
+
 
 /**
  *
  * @author Sam Wright <swrigh11@dcs.bbk.ac.uk>
  */
-public class CircularList implements Exercise {
+public class CircularListExercise implements Exercise {
     public String getTitle() {
         return "Circular List";
     }
@@ -24,37 +26,40 @@ public class CircularList implements Exercise {
     }
     
     public void run() {
-        Rounds lst = new Rounds();
+        CircularList lst = new CircularList();
         
-        OneWayPatient[] patients = new OneWayPatient[10];
+        Patient[] patients = new Patient[10];
         String[] names = new String[]{"Andy", "Ben", "Charlie", "Dan", "Emily", 
                                     "Fran", "Gerald", "Harry", "Isaac", "John"};
     
         for (int i=0; i<10; i++) {
-            patients[i] = new OneWayPatient(names[i], 20+i, "abcdefghij".substring(i,i+1));
+            patients[i] = new Patient(names[i], 20+i, "abcdefghij".substring(i,i+1));
             lst.add(patients[i]);
         }
         
-        lst.printForwards();
+        lst.printUsingItr( lst.getForwardItr() );
         
         lst.delete(patients[2]);
         lst.delete(patients[8]);
         System.out.println("\nCharlie and Isaac opted out of the waiting list.");
         
-        lst.printForwards();
+        lst.printUsingItr( lst.getForwardItr() );
         
-        OneWayPatient extra = new OneWayPatient("Kelly", 30, "k");
+        Patient extra = new Patient("Kelly", 30, "k");
         lst.add(extra);
         
         System.out.println("\nAdded Kelly to the list.");
-        lst.printForwards();
+        lst.printUsingItr( lst.getForwardItr() );
         
         System.out.println("\nTrying to delete Xander from the list...");
-        OneWayPatient non_existant = new OneWayPatient("Xander", 80, "x");
+        Patient non_existant = new Patient("Xander", 80, "x");
         lst.delete(non_existant);
     }
 }
 
+
+
+/*
 class OneWayPatient extends BasePatient {
     private OneWayPatient next_patient;
     
@@ -141,3 +146,4 @@ class Rounds {
         } while(p != last_patient);
     }
 }
+*/

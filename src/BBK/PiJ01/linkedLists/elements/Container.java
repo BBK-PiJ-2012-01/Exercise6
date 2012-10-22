@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 
-package BBK.PiJ01.exercise6;
+package BBK.PiJ01.linkedLists.elements;
+
+import BBK.PiJ01.linkedLists.elements.Element;
 
 /**
  *
@@ -17,7 +19,6 @@ public class Container <T> extends Element{
         this.obj = obj;
     }
     
-    @Override
     public T getObject() {
         return obj;
     }

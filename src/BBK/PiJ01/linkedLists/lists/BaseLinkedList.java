@@ -3,21 +3,24 @@
  * and open the template in the editor.
  */
 
-package BBK.PiJ01.exercise6;
+package BBK.PiJ01.linkedLists.lists;
+
+
+import BBK.PiJ01.linkedLists.elements.Container;
+import BBK.PiJ01.linkedLists.elements.ElementInterface;
+import BBK.PiJ01.linkedLists.iterators.Iterator;
 
 /**
  *
  * @author Sam Wright <swrigh11@dcs.bbk.ac.uk>
  */
-public abstract class AbstractLinkedList <T extends AbstractElement> {
+public class BaseLinkedList <T extends ElementInterface> {
     protected T first_element;
     protected T last_element;
     protected int number_of_elements = 0;
     
     
     protected void addElement(T new_element) {
-        
-        
         if (last_element != null) {
             last_element.setNext(new_element);
             last_element = new_element;
@@ -77,21 +80,9 @@ public abstract class AbstractLinkedList <T extends AbstractElement> {
     }
     
     protected T getNextElement(T e) {
-        //T to_return = (T) e.getNext();
-        //System.out.println("Trying to get next: " + e.toString());
-        //System.out.println("\tfound: " + e.getNext().toString());
         if (e == null)
             return null;
         return (T) e.getNext();
-        //return null;
-    }
-    
-    protected T getFirstElement() {
-        return first_element;
-    }    
-    
-    protected T getLastElement() {
-        return last_element;
     }
     
     protected T getPrevElement(T e) {
@@ -145,11 +136,19 @@ public abstract class AbstractLinkedList <T extends AbstractElement> {
     
     protected class ForwardIterator extends Iterator<T> {
         protected T getStartingElement() {
-            return getFirstElement();
+            return first_element;
         } 
         
         protected T getFinishingElement() {
-            return getLastElement();
+            return last_element;
+        }
+        
+        protected void setStartingElement(T e) {
+            first_element = e;
+        }
+        
+        protected void setFinishingElement(T e) {
+            last_element = e;
         }
         
         protected T getNextElement() {
@@ -159,11 +158,19 @@ public abstract class AbstractLinkedList <T extends AbstractElement> {
     
     protected class BackwardIterator extends Iterator<T> {
         protected T getStartingElement() {
-            return getLastElement();
-        } 
+            return last_element;
+        }
+        
+        protected void setStartingElement(T e) {
+            last_element = e;
+        }
+        
+        protected void setFinishingElement(T e) {
+            first_element = e;
+        }
         
         protected T getFinishingElement() {
-            return getFirstElement();
+            return first_element;
         }
         
         protected T getNextElement() {

@@ -4,6 +4,7 @@
  */
 package BBK.PiJ01.exercise6;
 
+import BBK.PiJ01.linkedLists.lists.DoublyLinkedList;
 import BBK.PiJ01.common.BadInput;
 import BBK.PiJ01.common.Exercise;
 import BBK.PiJ01.common.ExerciseChooser;
@@ -24,9 +25,10 @@ public class Exercise6 {
         exercises.add(new SpyExercise());
         exercises.add(new DoWhilePractise());
         exercises.add(new DoublyLinkedListExercise());
-        exercises.add(new CircularList());
+        exercises.add(new CircularListExercise());
         exercises.add(new QueuesExercise());
         exercises.add(new StacksExercise());
+        exercises.add(new ArrayToList());
         
         ExerciseChooser ech = new ExerciseChooser(exercises);
         ech.run();

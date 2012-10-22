@@ -5,7 +5,9 @@
 
 package BBK.PiJ01.exercise6;
 
+import BBK.PiJ01.linkedLists.elements.Element;
 import BBK.PiJ01.common.Exercise;
+import BBK.PiJ01.linkedLists.lists.Queue;
 
 /**
  *
@@ -32,7 +34,9 @@ public class QueuesExercise implements Exercise {
         System.out.format("Retrieved: %s\n", q.retrieve());
         System.out.format("Retrieved: %s\n", q.retrieve());
         System.out.format("There's %d elements in the queue...\n", q.size());
+        
         q.insert("Fourth in");
+        System.out.format("Added fourth\n");
         
         System.out.format("Retrieved: %s\n", q.retrieve());
         System.out.format("Retrieved: %s\n", q.retrieve());
@@ -41,6 +45,8 @@ public class QueuesExercise implements Exercise {
 }
 
 
+
+/*
 class Queue <T> {
     private Element<T> next_element;
     private Element<T> final_element;
@@ -79,3 +85,4 @@ class Queue <T> {
         return number_of_elements;
     }
 }
+*/
