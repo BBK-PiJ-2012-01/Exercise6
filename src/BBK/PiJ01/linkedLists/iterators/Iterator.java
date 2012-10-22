@@ -73,10 +73,13 @@ public abstract class Iterator <T extends ElementInterface> {
             itr.prev_element.setNext(this_element);
         } catch(NullPointerException err1) {
             this_element.setPrev(null);
+            setStartingElement(this_element);
         }
         
         this_element.setNext(itr.this_element);
         
+        if (next_element == null)
+            setFinishingElement((T) itr.this_element);
         itr.this_element.setNext(next_element);
         
         
@@ -95,6 +98,10 @@ public abstract class Iterator <T extends ElementInterface> {
     }
     
     protected void swapWithDistant(Iterator itr) {
+        System.out.format("itr: " + itr.prev_element + " , " + itr.this_element
+                 + " , " + itr.next_element + "      :       ");
+        System.out.format("this: " + prev_element + " , " + this_element
+                 + " , " + next_element + "\n");
         // First, we swap the element's positions in
         // the actual list.  This doesn't affect either
         // iterators' instance variables.
@@ -105,7 +112,7 @@ public abstract class Iterator <T extends ElementInterface> {
             prev_element.setNext(itr.this_element);
         } catch(NullPointerException err1) {
             itr.this_element.setPrev(null);
-            setFinishingElement((T) itr.this_element);
+            setStartingElement((T) itr.this_element);
         }
         
         if (next_element == null)
@@ -116,7 +123,7 @@ public abstract class Iterator <T extends ElementInterface> {
             itr.prev_element.setNext(this_element);
         } catch (NullPointerException err2) {
             this_element.setPrev(null);
-            setFinishingElement(this_element);
+            setStartingElement(this_element);
         }
         
         if (itr.next_element == null)

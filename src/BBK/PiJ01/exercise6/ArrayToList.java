@@ -40,7 +40,7 @@ public class ArrayToList implements Exercise {
         
         
         Iterator itr_ahead = nums_lst.getForwardItr();
-        //itr_ahead.next();
+        itr_ahead.next();
         itr_ahead.next();
         Iterator itr_behind = nums_lst.getForwardItr();
         
@@ -56,12 +56,7 @@ public class ArrayToList implements Exercise {
         
         while (itr_ahead.hasNext()) {
             System.out.println(itr_ahead.next());
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {}
         }
-        
-        
     }
 }
 
