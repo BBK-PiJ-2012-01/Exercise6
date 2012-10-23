@@ -32,12 +32,12 @@ public class BubbleSortExercise implements Exercise {
             //lst.insert((int)Math.abs(Math.random()*1000));
             lst.insert(i);
         }
-        lst.printUsingItr( lst.getBackwardItr() );
+        lst.printUsingItr( lst.getForwardItr() );
         
         System.out.println("starting sort....");
         BubbleSort.sort(lst);
         
-        //lst.printUsingItr( lst.getForwardItr() );
+        lst.printUsingItr( lst.getForwardItr() );
     }
 }
 

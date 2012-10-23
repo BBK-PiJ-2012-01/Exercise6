@@ -7,6 +7,7 @@ package BBK.PiJ01.linkedLists.util;
 
 import BBK.PiJ01.linkedLists.elements.SortableContainer;
 import BBK.PiJ01.linkedLists.iterators.Iterator;
+import BBK.PiJ01.linkedLists.iterators.SwappingIterator;
 import BBK.PiJ01.linkedLists.lists.SortableList;
 
 /**
@@ -15,12 +16,12 @@ import BBK.PiJ01.linkedLists.lists.SortableList;
  */
 public class BubbleSort {
     static public <T extends Comparable<T>> void sort(SortableList<T> lst) {
-        while(sortLoop(lst, true)) {}
+        while(sortLoop(lst, false)) {}
     }
     
     static public <T extends Comparable<T>> boolean sortLoop(SortableList<T> lst, boolean forwards) {
-        Iterator<SortableContainer<T>> itr_ahead;
-        Iterator<SortableContainer<T>> itr_behind;
+        SwappingIterator<T> itr_ahead;
+        SwappingIterator<T> itr_behind;
         boolean swapped_this_run = false;
         
         if (forwards) {

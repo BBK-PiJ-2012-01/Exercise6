@@ -159,29 +159,13 @@ public class BaseLinkedList <T extends ElementInterface> {
         protected T getStartingElement() {
             return first_element;
         } 
-        
-        protected T getFinishingElement() {
+         
+       protected T getFinishingElement() {
             return last_element;
-        }
-        
-        protected void setStartingElement(T e) {
-            first_element = e;
-        }
-        
-        protected void setFinishingElement(T e) {
-            last_element = e;
         }
         
         protected T getNextElement() {
             return getNextElement((T) next_element);
-        }
-        
-        protected void setNextElement(T e, T next) {
-            try {
-                next.setNext(e);
-            } catch(NullPointerException err) {
-                e.setPrev(next);
-            }
         }
         
         protected void insertAfterRef(T e, T ref) {
@@ -198,28 +182,12 @@ public class BaseLinkedList <T extends ElementInterface> {
             return last_element;
         }
         
-        protected void setStartingElement(T e) {
-            last_element = e;
-        }
-        
-        protected void setFinishingElement(T e) {
-            first_element = e;
-        }
-        
         protected T getFinishingElement() {
             return first_element;
         }
         
         protected T getNextElement() {
             return getPrevElement((T) next_element);
-        }
-        
-        protected void setNextElement(T e, T next) {
-            try {
-                next.setNext(e);
-            } catch(NullPointerException err) {
-                e.setPrev(next);
-            }
         }
         
         protected void insertAfterRef(T e, T ref) {
