@@ -30,7 +30,7 @@ public class CocktailSortExercise implements Exercise {
             lst.insert((int)Math.abs(Math.random()*1000));
         }
         
-        CocktailSort.sort(lst);
+        CocktailSort.ascending(lst);
         
         lst.printUsingItr( lst.getForwardItr() );
     }

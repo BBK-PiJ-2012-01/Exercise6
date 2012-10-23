@@ -45,7 +45,6 @@ public class SortableList <T extends Comparable<T>>
     protected class ForwardIterator extends SwappingIterator<T> {
         @Override
         protected SortableContainer<T> getStartingElement() {
-            System.out.println(" USING THE NEW INNER CLASS!!! ");
             return first_element;
         }
 

@@ -35,7 +35,7 @@ public class BubbleSortExercise implements Exercise {
         lst.printUsingItr( lst.getForwardItr() );
         
         System.out.println("starting sort....");
-        BubbleSort.sort(lst);
+        BubbleSort.ascending(lst);
         
         lst.printUsingItr( lst.getForwardItr() );
     }
