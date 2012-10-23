@@ -5,16 +5,16 @@
 
 package BBK.PiJ01.linkedLists.elements;
 
-import BBK.PiJ01.linkedLists.elements.Element;
-
 /**
  *
  * @author Sam Wright <swrigh11@dcs.bbk.ac.uk>
  */
-public class Container <T> extends Element implements ContainerInterface<T> {
-    protected T obj;
+public class SortableContainer <T extends Comparable<T>> extends DoublyElement 
+                            implements Comparable<SortableContainer<T>>,
+                                        ContainerInterface<T> {
+    T obj;
     
-    public Container(T obj) {
+    public SortableContainer(T obj) {
         setObject(obj);
     }
     
@@ -24,6 +24,10 @@ public class Container <T> extends Element implements ContainerInterface<T> {
     
     public T getObject() {
         return obj;
+    }
+    
+    public int compareTo(SortableContainer<T> other) {
+        return obj.compareTo( other.getObject() );
     }
     
     public String toString() {

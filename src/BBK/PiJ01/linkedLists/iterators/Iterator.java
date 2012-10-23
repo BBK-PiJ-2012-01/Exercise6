@@ -26,6 +26,7 @@ public abstract class Iterator <T extends ElementInterface> {
         finishing_element = getFinishingElement();
         if (finishing_element == null)
             iterating = false;
+        System.out.format("FINISH: %s", finishing_element);
     }
     
     public boolean hasNext() {
@@ -33,6 +34,10 @@ public abstract class Iterator <T extends ElementInterface> {
     }
     
     public T next() {
+        System.out.format("prev: %s\t\tthis: %s\t\tnext: %s\n", prev_element,this_element,next_element);
+        try {
+            Thread.sleep(500);
+        } catch(InterruptedException e) {}
         prev_element = this_element;
         this_element = next_element;
         next_element = getNextElement();
@@ -43,23 +48,15 @@ public abstract class Iterator <T extends ElementInterface> {
     
     public void insertAhead(T e) {
         insertAfterRef(e, this_element);
-        if (finishing_element == this_element) {
-            finishing_element = getFinishingElement();
-            iterating = true;
-        }
+        
+        finishing_element = getFinishingElement();
+        iterating = true;
         
         next_element = e;
     }
     
     public void insertBehind(T e) {
-        System.out.format("\ninserting %s before %s ... ", e, this_element);
-        try {
-            insertAfterRef(e, prev_element);
-        } catch (NullPointerException err) {
-            System.out.format("that was the first.");
-            insertBeforeRef(e, this_element);
-        }
-        
+        insertBeforeRef(e, this_element);
         prev_element = e;
     }
     
@@ -85,12 +82,6 @@ public abstract class Iterator <T extends ElementInterface> {
         // First we swap the element's positions in
         // the actual list.  This doesn't affect either
         // iterators' instance variables.
-        
-        System.out.format("itr: " + itr.prev_element + " , " + itr.this_element
-                 + " , " + itr.next_element + "      :       ");
-        System.out.format("this: " + prev_element + " , " + this_element
-                 + " , " + next_element + "\n");
-        
         try {
             itr.prev_element.setNext(this_element);
         } catch(NullPointerException err1) {
@@ -120,10 +111,6 @@ public abstract class Iterator <T extends ElementInterface> {
     }
     
     protected void swapWithDistant(Iterator itr) {
-        System.out.format("itr: " + itr.prev_element + " , " + itr.this_element
-                 + " , " + itr.next_element + "      :       ");
-        System.out.format("this: " + prev_element + " , " + this_element
-                 + " , " + next_element + "\n");
         // First, we swap the element's positions in
         // the actual list.  This doesn't affect either
         // iterators' instance variables.
@@ -166,6 +153,7 @@ public abstract class Iterator <T extends ElementInterface> {
     abstract protected T getFinishingElement();
     abstract protected void setFinishingElement(T e);
     abstract protected T getNextElement();
+    abstract protected void setNextElement(T e, T next);
     abstract protected void insertAfterRef(T e, T ref);
     abstract protected void insertBeforeRef(T e, T ref);
 }

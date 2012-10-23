@@ -176,6 +176,14 @@ public class BaseLinkedList <T extends ElementInterface> {
             return getNextElement((T) next_element);
         }
         
+        protected void setNextElement(T e, T next) {
+            try {
+                next.setNext(e);
+            } catch(NullPointerException err) {
+                e.setPrev(next);
+            }
+        }
+        
         protected void insertAfterRef(T e, T ref) {
             insertNextToRef(e, ref);
         }
@@ -204,6 +212,14 @@ public class BaseLinkedList <T extends ElementInterface> {
         
         protected T getNextElement() {
             return getPrevElement((T) next_element);
+        }
+        
+        protected void setNextElement(T e, T next) {
+            try {
+                next.setNext(e);
+            } catch(NullPointerException err) {
+                e.setPrev(next);
+            }
         }
         
         protected void insertAfterRef(T e, T ref) {

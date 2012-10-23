@@ -6,8 +6,9 @@
 package BBK.PiJ01.exercise6;
 
 import BBK.PiJ01.common.Exercise;
-import BBK.PiJ01.linkedLists.elements.ComparableContainer;
-import BBK.PiJ01.linkedLists.iterators.Iterator;
+import BBK.PiJ01.linkedLists.lists.SortableList;
+import BBK.PiJ01.linkedLists.lists.SortedList;
+import BBK.PiJ01.linkedLists.util.BubbleSort;
 
 /**
  *
@@ -25,16 +26,18 @@ public class BubbleSortExercise implements Exercise {
     
     public void run() {
         
-        Iterator<ComparableContainer<Integer>> itr = getForwardItr();
-        ComparableContainer<T> new_value_obj = new ComparableContainer<T>(value);
+        SortableList<Integer> lst = new SortableList<Integer>();
         
-        while (itr.hasNext()) {
-            if (itr.next().compareTo(new_value_obj) > 0) {
-                itr.insertBehind(new_value_obj);
-                return;
-            }
+        for (int i=0; i<20; i++) {
+            //lst.insert((int)Math.abs(Math.random()*1000));
+            lst.insert(i);
         }
-        addElement(new_value_obj);
+        lst.printUsingItr( lst.getBackwardItr() );
+        
+        System.out.println("starting sort....");
+        BubbleSort.sort(lst);
+        
+        //lst.printUsingItr( lst.getForwardItr() );
     }
 }
 

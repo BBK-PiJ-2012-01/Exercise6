@@ -9,8 +9,8 @@ package BBK.PiJ01.linkedLists.elements;
  * @author Sam Wright <swrigh11@dcs.bbk.ac.uk>
  */
 public class DoublyElement implements ElementInterface {
-    protected ElementInterface prev;// = Patient.test_element;
-    protected ElementInterface next;// = Patient.test_element;
+    protected ElementInterface prev;
+    protected ElementInterface next;
     
     public void setPrev(ElementInterface prev) {
         this.prev = prev;
@@ -30,10 +30,12 @@ public class DoublyElement implements ElementInterface {
         }
     }
     
+    @Override
     public ElementInterface getPrev() {
         return prev;
     }
     
+    @Override
     public ElementInterface getNext() {
         return next;
     }

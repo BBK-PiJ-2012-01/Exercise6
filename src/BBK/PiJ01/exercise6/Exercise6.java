@@ -30,6 +30,8 @@ public class Exercise6 {
         exercises.add(new StacksExercise());
         exercises.add(new ArrayToList());
         exercises.add(new SortedListExercise());
+        exercises.add(new BubbleSortExercise());
+        exercises.add(new CocktailSortExercise());
         
         ExerciseChooser ech = new ExerciseChooser(exercises);
         ech.run();
