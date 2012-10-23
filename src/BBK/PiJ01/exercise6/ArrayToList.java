@@ -6,6 +6,7 @@
 package BBK.PiJ01.exercise6;
 
 import BBK.PiJ01.common.Exercise;
+import BBK.PiJ01.common.IOGeneric;
 import BBK.PiJ01.linkedLists.iterators.Iterator;
 import BBK.PiJ01.linkedLists.lists.LinkedList;
 
@@ -19,7 +20,7 @@ public class ArrayToList implements Exercise {
     }
     
     public String getDescription() {
-        return "Creates int[], String[], and Person[] arrays,\n"
+        return "Creates int[], Integer[], and Person[] arrays,\n"
                 + "and converts them to LinkedLists.";
     }
     
@@ -36,32 +37,26 @@ public class ArrayToList implements Exercise {
         nums2_lst = LinkedList.fromArray(nums2);
         people_lst = LinkedList.fromArray(people);
         
+        IOGeneric.printTitle("int[] list", "-");
+        nums_lst.printUsingItr(nums_lst.getForwardItr());
         
-        Iterator itr_ahead = nums_lst.getForwardItr();
-        itr_ahead.next();
-        itr_ahead.next();
-        Iterator itr_behind = nums_lst.getForwardItr();
+        IOGeneric.printTitle("Integer[] list", "-");
+        nums2_lst.printUsingItr(nums2_lst.getForwardItr());
         
-        while (itr_behind.hasNext() && itr_ahead.hasNext()) {
-            //System.out.println(itr1.next() + " and " + itr2.next());
-            itr_ahead.next();
-            itr_behind.next();
-            itr_ahead.swapWith(itr_behind);
-            
-        }
-        
-        itr_ahead = nums_lst.getForwardItr();
-        
-        while (itr_ahead.hasNext()) {
-            System.out.println(itr_ahead.next());
-        }
+        IOGeneric.printTitle("Person[] list", "-");
+        people_lst.printUsingItr(people_lst.getForwardItr());
     }
 }
 
 
 class Person {
     int i;
+    
     public Person(int i) {
         this.i = i;
+    }
+    
+    public String toString() {
+        return "Person " + i;
     }
 }

@@ -156,12 +156,8 @@ public class BaseLinkedList <T extends ElementInterface> {
     }
     
     protected class ForwardIterator extends Iterator<T> {
-        protected T getStartingElement() {
-            return first_element;
-        } 
-         
-       protected T getFinishingElement() {
-            return last_element;
+        public ForwardIterator() {
+            super(first_element, last_element);
         }
         
         protected T getNextElement() {
@@ -178,12 +174,8 @@ public class BaseLinkedList <T extends ElementInterface> {
     }
     
     protected class BackwardIterator extends Iterator<T> {
-        protected T getStartingElement() {
-            return last_element;
-        }
-        
-        protected T getFinishingElement() {
-            return first_element;
+        public BackwardIterator() {
+            super(last_element, first_element);
         }
         
         protected T getNextElement() {

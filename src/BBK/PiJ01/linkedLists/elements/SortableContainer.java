@@ -18,6 +18,16 @@ public class SortableContainer <T extends Comparable<T>> extends DoublyElement
         setObject(obj);
     }
     
+    @Override
+    public SortableContainer<T> getPrev() {
+        return (SortableContainer<T>) prev;
+    }
+    
+    @Override
+    public SortableContainer<T> getNext() {
+        return (SortableContainer<T>) next;
+    }
+    
     public void setObject(T obj) {
         this.obj = obj;
     }
@@ -28,6 +38,12 @@ public class SortableContainer <T extends Comparable<T>> extends DoublyElement
     
     public int compareTo(SortableContainer<T> other) {
         return obj.compareTo( other.getObject() );
+    }
+    
+    public void swapWith(SortableContainer<T> other) {
+        T old_obj = obj;
+        obj = other.getObject();
+        other.setObject(old_obj);
     }
     
     public String toString() {

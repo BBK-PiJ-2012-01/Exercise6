@@ -37,22 +37,28 @@ public class SortableList <T extends Comparable<T>>
         return new ForwardIterator();
     }
     
+    public SwappingIterator<T> getForwardItr(SortableContainer<T> first, SortableContainer<T> last) {
+        return new ForwardIterator(first, last);
+    }
+    
     @Override
     public SwappingIterator<T> getBackwardItr() {
         return new BackwardIterator();
     }
     
+    public SwappingIterator<T> getBackwardItr(SortableContainer<T> first, SortableContainer<T> last) {
+        return new BackwardIterator(first, last);
+    }
+    
     protected class ForwardIterator extends SwappingIterator<T> {
-        @Override
-        protected SortableContainer<T> getStartingElement() {
-            return first_element;
+        public ForwardIterator(SortableContainer<T> first, SortableContainer<T> last) {
+            super(first, last);
         }
-
-        @Override
-        protected SortableContainer<T> getFinishingElement() {
-            return last_element;
+        
+        public ForwardIterator() {
+            super(first_element, last_element);
         }
-
+        
         @Override
         protected SortableContainer<T> getNextElement() {
             return getNextElement(next_element);
@@ -70,14 +76,12 @@ public class SortableList <T extends Comparable<T>>
     }
     
     protected class BackwardIterator extends SwappingIterator<T> {
-        @Override
-        protected SortableContainer<T> getStartingElement() {
-            return last_element;
+        public BackwardIterator(SortableContainer<T> first, SortableContainer<T> last) {
+            super(first, last);
         }
-
-        @Override
-        protected SortableContainer<T> getFinishingElement() {
-            return first_element;
+        
+        public BackwardIterator() {
+            super(last_element, first_element);
         }
 
         @Override

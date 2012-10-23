@@ -21,9 +21,9 @@ public abstract class Iterator <T extends ElementInterface> {
     protected boolean iterating = true;
     
     
-    public Iterator() {
-        next_element = getStartingElement();
-        finishing_element = getFinishingElement();
+    public Iterator(T next_element, T finishing_element) {
+        this.next_element = next_element;
+        this.finishing_element = finishing_element;
         if (finishing_element == null)
             iterating = false;
     }
@@ -48,8 +48,10 @@ public abstract class Iterator <T extends ElementInterface> {
     public void insertAhead(T e) {
         insertAfterRef(e, this_element);
         
-        finishing_element = getFinishingElement();
-        iterating = true;
+        if (this_element == finishing_element) {
+            finishing_element = e;
+            iterating = true;
+        }
         
         next_element = e;
     }
@@ -59,10 +61,7 @@ public abstract class Iterator <T extends ElementInterface> {
         prev_element = e;
     }
     
-    abstract protected T getStartingElement();
-    abstract protected T getFinishingElement();
     abstract protected T getNextElement();
-    
     abstract protected void insertAfterRef(T e, T ref);
     abstract protected void insertBeforeRef(T e, T ref);
 }

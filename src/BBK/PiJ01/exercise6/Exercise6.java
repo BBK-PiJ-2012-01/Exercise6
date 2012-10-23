@@ -32,6 +32,8 @@ public class Exercise6 {
         exercises.add(new SortedListExercise());
         exercises.add(new BubbleSortExercise());
         exercises.add(new CocktailSortExercise());
+        exercises.add(new QuickSortExercise());
+        exercises.add(new SortComparison());
         
         ExerciseChooser ech = new ExerciseChooser(exercises);
         ech.run();

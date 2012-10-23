@@ -12,9 +12,15 @@ import BBK.PiJ01.linkedLists.elements.SortableContainer;
  * @author Sam Wright <swrigh11@dcs.bbk.ac.uk>
  */
 public abstract class SwappingIterator <T extends Comparable<T>> extends Iterator<SortableContainer<T>> {
+    public SwappingIterator(SortableContainer<T> first, SortableContainer<T> last) {
+        super(first, last);
+    }
+    
     public void swapWith(SwappingIterator<T> that) {
-        T this_old_obj = this_element.getObject();
-        this_element.setObject(that.this_element.getObject());
-        that.this_element.setObject(this_old_obj);
+        this_element.swapWith(that.this_element);
+    }
+    
+    public void swapWith(SortableContainer<T> that_element) {
+        this_element.swapWith(that_element);
     }
 }
