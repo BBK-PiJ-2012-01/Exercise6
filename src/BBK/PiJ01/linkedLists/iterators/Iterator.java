@@ -33,13 +33,9 @@ public abstract class Iterator <T extends ElementInterface> {
     }
     
     public T next() {
-        /*System.out.format("prev: %s\t\tthis: %s\t\tnext: %s\n", prev_element,this_element,next_element);
-        try {
-            Thread.sleep(10);
-        } catch(InterruptedException e) {}*/
         prev_element = this_element;
         this_element = next_element;
-        next_element = getNextElement();
+        next_element = getNextElementFromList();
         if (this_element == finishing_element)
             iterating = false;
         return this_element;
@@ -61,7 +57,7 @@ public abstract class Iterator <T extends ElementInterface> {
         prev_element = e;
     }
     
-    abstract protected T getNextElement();
+    abstract protected T getNextElementFromList();
     abstract protected void insertAfterRef(T e, T ref);
     abstract protected void insertBeforeRef(T e, T ref);
 }

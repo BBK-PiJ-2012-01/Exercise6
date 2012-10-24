@@ -160,7 +160,7 @@ public class BaseLinkedList <T extends ElementInterface> {
             super(first_element, last_element);
         }
         
-        protected T getNextElement() {
+        protected T getNextElementFromList() {
             return getNextElement((T) next_element);
         }
         
@@ -178,7 +178,7 @@ public class BaseLinkedList <T extends ElementInterface> {
             super(last_element, first_element);
         }
         
-        protected T getNextElement() {
+        protected T getNextElementFromList() {
             return getPrevElement((T) next_element);
         }
         

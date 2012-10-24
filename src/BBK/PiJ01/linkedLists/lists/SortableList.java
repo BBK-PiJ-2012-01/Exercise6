@@ -60,10 +60,10 @@ public class SortableList <T extends Comparable<T>>
         }
         
         @Override
-        protected SortableContainer<T> getNextElement() {
+        protected SortableContainer<T> getNextElementFromList() {
             return getNextElement(next_element);
         }
-
+        
         @Override
         protected void insertAfterRef(SortableContainer<T> e, SortableContainer<T> ref) {
             insertNextToRef(e, ref);
@@ -85,7 +85,7 @@ public class SortableList <T extends Comparable<T>>
         }
 
         @Override
-        protected SortableContainer<T> getNextElement() {
+        protected SortableContainer<T> getNextElementFromList() {
             return getPrevElement(next_element);
         }
 
