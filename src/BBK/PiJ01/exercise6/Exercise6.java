@@ -4,7 +4,6 @@
  */
 package BBK.PiJ01.exercise6;
 
-import BBK.PiJ01.linkedLists.lists.DoublyLinkedList;
 import BBK.PiJ01.common.BadInput;
 import BBK.PiJ01.common.Exercise;
 import BBK.PiJ01.common.ExerciseChooser;

@@ -44,10 +44,12 @@ public class BaseLinkedList <T extends ElementInterface> {
         T popped = null;
         if (last_element != null) {
             popped = last_element;
-            last_element = getPrevElement(last_element);
-            if (last_element == null)
+            if (popped == first_element)
                 setAsOnlyElement(null);
-            --number_of_elements;
+            else {
+                last_element = getPrevElement(last_element);
+                --number_of_elements;
+            }
         }
         return popped;
     }
@@ -56,10 +58,12 @@ public class BaseLinkedList <T extends ElementInterface> {
         T popped = null;
         if (first_element != null) {
             popped = first_element;
-            first_element = getNextElement(first_element);
-            if (first_element == null)
+            if (popped == last_element)
                 setAsOnlyElement(null);
-            --number_of_elements;
+            else {
+                first_element = getNextElement(first_element);
+                --number_of_elements;
+            }
         }
         return popped;
     }
@@ -76,7 +80,7 @@ public class BaseLinkedList <T extends ElementInterface> {
             return; 
         }
         cleanDeletedElement(e);
-        --number_of_elements;
+        
     }
     
     protected T getNextElement(T e) {
@@ -123,9 +127,13 @@ public class BaseLinkedList <T extends ElementInterface> {
     protected void setAsOnlyElement(T e) {
         first_element = e;
         last_element = e;
-        number_of_elements = 1;
-        if (e != null)
+        
+        if (e != null) {
             cleanDeletedElement(e);
+            number_of_elements = 1;
+        } else {
+            number_of_elements = 0;
+        }
     } 
     
     protected void deleteNextElement(T before_deleted) {
@@ -136,6 +144,7 @@ public class BaseLinkedList <T extends ElementInterface> {
             after_deleted = null;
         }
         before_deleted.setNext(after_deleted);
+        --number_of_elements;
     }
     
     public void printUsingItr(Iterator itr) {

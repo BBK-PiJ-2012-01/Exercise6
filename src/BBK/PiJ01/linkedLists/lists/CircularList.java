@@ -20,14 +20,19 @@ public class CircularList <T extends ElementInterface> extends BaseLinkedList<T>
     @Override
     protected T popEndElement() {
         T popped = super.popEndElement();
-        last_element.setNext(first_element);
+        try {
+            last_element.setNext(first_element);
+        } catch(NullPointerException err) {}
+        
         return popped;
     }
     
     @Override
     protected void setAsOnlyElement(T e) {
         super.setAsOnlyElement(e);
-        e.setNext(e);
+        try {
+            e.setNext(e);
+        } catch (NullPointerException err) {}
     }
     
     public void delete(T e) {
